@@ -7,5 +7,6 @@ ENV GOPATH $HOME/.go
 RUN yum install git -y
 
 RUN go get github.com/facebookgo/rocks-strata/strata
-RUN cd $GOPATH/src/github.com/facebookgo/rocks-strata/strata/cmd/mongo/lreplica_s3storage_driver/strata && go get ./... && go build
-RUN ln -s $GOPATH/src/github.com/facebookgo/rocks-strata/strata/cmd/mongo/lreplica_s3storage_driver/strata/strata /usr/local/bin/strata
+RUN cd $GOPATH/src/github.com/facebookgo/rocks-strata/strata/cmd/mongo/lreplica_drivers/strata && go get -v ./... && go build -v
+RUN ln -s $GOPATH/src/github.com/facebookgo/rocks-strata/strata/cmd/mongo/lreplica_drivers/strata/strata /usr/local/bin/strata
+CMD ["mongod", "--dbpath=/data/db",  "--storageEngine=rocksdb"]
